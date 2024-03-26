@@ -1,0 +1,88 @@
+1. Function: process(input_image, params, model_params):
+
+This function is the main entry point for processing an input image to detect keypoints using the OpenPose model.
+It loads the input image, resizes it based on scale factors, and computes heatmaps and PAFs using the pre-trained model.
+The heatmaps and PAFs are then processed to detect keypoint peaks.
+Various posture checks are performed based on the detected keypoints.
+Finally, the keypoints are drawn on the image, and the processed image along with the detected posture is returned.
+Parameters:
+input_image: Path to the input image.
+params: Parameters for the OpenPose model.
+model_params: Parameters specific to the loaded model.
+
+
+2. Function: draw(input_image, all_peaks):
+
+This function draws the detected keypoints on the input image.
+It iterates over each keypoint and draws a circle with a specific color at the corresponding position.
+The resulting image with keypoints drawn is returned.
+Parameters:
+input_image: Path to the input image.
+all_peaks: List of detected keypoints.
+
+3. Function: checkPosition(all_peaks):
+
+This function determines the posture of a person based on the angles between specific keypoint detections.
+It calculates the angle between two keypoint positions to infer the posture.
+The posture is classified as hyperkyphosis, slouching, or neutral based on predefined angle thresholds.
+Returns an integer representing the detected posture (-1 for slouching, 1 for hyperkyphosis, and 0 for neutral).
+Parameter:
+all_peaks: List of detected keypoints.
+
+4. Function: calcAngle(a, b):
+
+This function calculates the angle between two points a and b using trigonometric functions.
+It computes the angle formed by joining the two points with the origin.
+Returns the angle in radians.
+Parameters:
+a: Coordinates of the first point.
+b: Coordinates of the second point.
+
+5. Function: checkHandFold(all_peaks):
+
+This function checks if a person's hands are folded based on the distance between specific keypoints representing hands and elbows.
+It calculates the distance between wrist and elbow keypoints and compares it to the expected arm length.
+Prints whether hands are folded or not based on the comparison.
+Parameter:
+all_peaks: List of detected keypoints.
+
+
+6. Function: calcDistance(a, b):
+
+This function calculates the Euclidean distance between two points a and b.
+It computes the straight-line distance between the two points in a two-dimensional space.
+Returns the distance.
+Parameters:
+a: Coordinates of the first point.
+b: Coordinates of the second point.
+
+
+7. Function: checkKneeling(all_peaks):
+
+This function checks if a person is leaning or kneeling based on the angles between specific keypoint detections.
+It calculates angles between hip and ankle keypoints to determine the posture.
+Prints the posture based on the angles detected.
+Parameter:
+all_peaks: List of detected keypoints.
+
+8. Function: showimage(img):
+
+This function displays the processed image with keypoints drawn using OpenCV.
+It resizes the image to fit the screen and waits for a key press to close the displayed image.
+Parameter:
+img: Processed image with keypoints drawn.
+
+9. Function: prinfTick(i):
+
+This function calculates and prints the processing time for each step of the processing pipeline.
+It takes an integer i denoting the step number.
+Measures the time elapsed since the start of processing and prints it.
+
+10.Main block:
+
+Loads the pre-trained model.
+Calls the process function to detect keypoints and posture from an input image.
+Displays the processed image and prints the detected posture.
+
+
+

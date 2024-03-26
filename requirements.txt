@@ -1,0 +1,8 @@
+numpy
+Keras
+Keras-Applications
+Keras-Preprocessing
+scipy
+opencv-contrib-python
+opencv-python
+tensorflow
